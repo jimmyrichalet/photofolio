@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photographie - Jimmy Richalet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+:root {
+  --bg:         #0a0a0f;
+  --bg-card:    #12121a;
+  --bg-card-2:  #1a1a26;
+  --border:     rgba(255,255,255,0.07);
+  --border-med: rgba(255,255,255,0.14);
+  --text:       #e8e8f0;
+  --text-muted: #888898;
+  --text-faint: #44445a;
+  --accent:     #7c6fcd;
+  --accent-2:   #5b50a8;
+  --accent-glow:rgba(124,111,205,0.18);
+  --accent-rgb: 124,111,205;
+  --green:      #4ade80;
+}
+
+[data-theme="light"] {
+  --bg:         #f4f4f8;
+  --bg-card:    #ffffff;
+  --bg-card-2:  #eeeef4;
+  --border:     rgba(0,0,0,0.08);
+  --border-med: rgba(0,0,0,0.14);
+  --text:       #111120;
+  --text-muted: #666676;
+  --text-faint: #aaaabc;
+  --accent:     #6258b8;
+  --accent-2:   #4a41a0;
+  --accent-glow:rgba(98,88,184,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+/* ── Layout ── */
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+
+/* ── Nav ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+  transition: background 0.3s;
+}
+
+[data-theme="light"] nav {
+  background: rgba(244,244,248,0.88);
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav-logo span {
+  color: var(--accent);
+}
+
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+
+.nav-links {
+  display: flex;
+  gap: 1.8rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.nav-links a:hover { color: var(--text); }
+
+.theme-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-med);
+  border-radius: 20px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.2s;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.theme-btn:hover { border-color: var(--accent); background: var(--accent-glow); }
+
+/* ── Socials ── */
+.social-row { display: flex; align-items: center; gap: 8px; }
+
+.social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-med);
+  color: var(--text-muted);
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.social-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.nav-sep {
+  width: 1px;
+  height: 22px;
+  background: var(--border-med);
+  margin: 0 2px;
+}
+
+/* ── Hero ── */
+.hero {
+  padding: 7rem 0 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -200px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(var(--accent-rgb),0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-glow);
+  border: 1px solid rgba(var(--accent-rgb),0.3);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 2rem;
+  letter-spacing: 0.02em;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.8); }
+}
+
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(44px, 6.5vw, 86px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title .accent { color: var(--accent); }
+.hero-title .italic { font-style: italic; font-weight: 600; }
+
+.hero-title-row {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title-row .hero-title { margin-bottom: 0; }
+
+.hero-avatar {
+  width: 92px;
+  height: 92px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow), 0 8px 24px rgba(0,0,0,0.35);
+}
+
+.hero-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.85;
+  max-width: 520px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.hero-socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 2.2rem;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary:hover { background: var(--accent-2); transform: translateY(-1px); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border-med);
+  border-radius: 8px;
+  padding: 11px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── Filters ── */
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-btn i { font-size: 11px; }
+
+.filter-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.filter-btn:hover:not(.active) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 120px;
+  grid-auto-flow: dense;
+  gap: 16px;
+  margin-bottom: 5rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  will-change: transform, box-shadow;
+}
+
+.card.visible { opacity: 1; transform: translateY(0); }
+
+.card:hover {
+  border-color: rgba(var(--accent-rgb),0.4);
+  box-shadow: 0 12px 48px rgba(var(--accent-rgb),0.15), 0 2px 12px rgba(0,0,0,0.3);
+  transform: translateY(-3px);
+}
+
+.card:hover .card-thumb { transform: scale(1.06); }
+.card:hover .card-overlay { opacity: 1; }
+.card:hover .card-info { opacity: 0; visibility: hidden; max-height: 0; padding: 0; border-top-color: transparent; }
+
+.card-thumb-wrap { overflow: hidden; position: relative; flex: 1 1 auto; min-height: 0; }
+.card-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--bg-card-2);
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.2rem 1.4rem;
+}
+
+.overlay-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  transform: translateY(6px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.overlay-sub {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-top: 4px;
+  transform: translateY(6px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.04s;
+}
+
+.card:hover .overlay-title,
+.card:hover .overlay-sub { transform: translateY(0); }
+
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 48px;
+  height: 48px;
+  background: rgba(124,111,205,0.85);
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-btn svg { width: 14px; height: 14px; fill: #fff; margin-left: 2px; }
+.play-btn i { font-size: 18px; color: #fff; }
+
+.card-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(10,10,15,0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border-med);
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 3px 10px;
+}
+
+.card-info {
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--border);
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s, max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-top-color 0.4s;
+}
+
+.card-info-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  letter-spacing: -0.01em;
+}
+
+.card-info-meta {
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+/* grid spans — masonry (6-col grid, 120px row tracks) */
+.gc-2 { grid-column: span 2; }
+.gc-3 { grid-column: span 3; }
+.gc-4 { grid-column: span 4; }
+.gc-6 { grid-column: span 6; }
+.gr-2 { grid-row: span 2; }
+.gr-3 { grid-row: span 3; }
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 5rem 0;
+}
+
+/* ── About ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+.about-body {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.95;
+  margin-bottom: 2rem;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.stat-card:hover { border-color: rgba(var(--accent-rgb),0.4); }
+
+.stat-card i {
+  font-size: 16px;
+  color: var(--accent);
+  opacity: 0.8;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.stat-n {
+  font-family: 'Syne', sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-l {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* ── Gear ── */
+.gear-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin-bottom: 5rem;
+}
+
+.gear-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  transition: border-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.gear-item i {
+  font-size: 16px;
+  color: var(--accent);
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.gear-item:hover { border-color: rgba(var(--accent-rgb),0.4); }
+.gear-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.gear-role { font-size: 12px; color: var(--text-faint); }
+
+/* ── Contact ── */
+.contact-bar {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.contact-cta {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.contact-cta span { color: var(--accent); }
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1.8rem 0;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-faint);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-inner span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-inner .social-btn {
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+}
+
+/* ── Modal ── */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.modal.open { display: flex; }
+
+.modal-close {
+  position: fixed;
+  top: 1.5rem;
+  right: 2rem;
+  font-size: 30px;
+  color: rgba(255,255,255,0.6);
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.modal-close:hover { color: #fff; }
+
+.modal-content { text-align: center; max-width: 90vw; }
+
+.modal-content img,
+.modal-content video {
+  max-width: 90vw;
+  max-height: 82vh;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+.modal-cap {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-top: 1rem;
+}
+
+.modal-counter {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.3);
+  margin-top: 0.3rem;
+}
+
+.modal-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 210;
+  transition: all 0.2s;
+}
+
+.modal-nav:hover {
+  background: rgba(var(--accent-rgb),0.35);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.modal-prev { left: 2rem; }
+.modal-next { right: 2rem; }
+
+.modal-dots {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1.1rem;
+}
+
+.modal-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  cursor: pointer;
+  transition: all 0.25s;
+  flex-shrink: 0;
+}
+
+.modal-dot:hover { background: rgba(255,255,255,0.5); }
+.modal-dot.active { background: var(--accent); width: 20px; border-radius: 4px; }
+
+@media (max-width: 768px) {
+  .modal-nav { width: 38px; height: 38px; font-size: 13px; }
+  .modal-prev { left: 0.6rem; }
+  .modal-next { right: 0.6rem; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .wrap { padding: 0 1rem; }
+  .hero { padding: 4rem 0 3rem; }
+  .grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+  .gc-2, .gc-3, .gc-4, .gc-6 { grid-column: span 2; }
+  .gr-2 { grid-row: span 2; }
+  .gr-3 { grid-row: span 2; }
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .contact-bar { flex-direction: column; align-items: flex-start; padding: 2rem; }
+  .nav-links { display: none; }
+  .nav-right { gap: 1rem; }
+  .social-row { gap: 6px; }
+  .social-btn { width: 32px; height: 32px; }
+}
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; }
+  .gc-2, .gc-3, .gc-4, .gc-6 { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#" class="nav-logo">Jimmy Media - Portfolio<span>.</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="social-row">
+        
+      </div>
+      <div class="nav-sep"></div>
+      <button class="theme-btn" id="theme-btn" title="Changer de thème">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Disponible pour des projets
+      </div>
+      <div class="hero-title-row">
+        <h1 class="hero-title">jimmy<span class="accent italic">media_</span></h1>
+        <div class="hero-avatar">
+          <img src="jimmy-photo.png" alt="Jimmy, photographe et vidéaste">
+        </div>
+      </div>
+      <p class="hero-sub">
+        L'adrénaline d'un <span style="color:var(--accent);font-style:italic">rassemblement auto</span>, la sérénité d'un <span style="color:var(--accent);font-style:italic">sommet</span>, l'émotion d'un <span style="color:var(--accent);font-style:italic">mariage</span>. Photographe et vidéaste en Haute-Savoie. <span style="color:var(--accent);font-style:italic">Je</span> suis là pour que rien ne s'efface.
+      </p>
+      <p class="about-body">
+            <span style="color:var(--accent);font-style:italic">Mon objectif ?</span> Vous créer un souvenir.
+          </p>
+      <div class="hero-ctas">
+        <a href="#galerie" class="btn-primary">Voir la galerie <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#contact" class="btn-outline"><i class="fa-regular fa-paper-plane"></i> Me contacter</a>
+      </div>
+      <div class="hero-socials">
+        <a href="mailto:jimmy.richalet.media@gmail.com" class="social-btn" title="Email" aria-label="Envoyer un email"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://instagram.com/jimmymedia_" target="_blank" rel="noopener" class="social-btn" title="Instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@jimmyrichaletmedia" target="_blank" rel="noopener" class="social-btn" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@jimmyrichalet.media" target="_blank" rel="noopener" class="social-btn" title="TikTok" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+    </section>
+
+    <!-- Galerie -->
+    <section id="galerie">
+      <div class="section-head">
+        <div>
+          <p class="section-label">Travaux</p>
+          <h2 class="section-title">Galerie</h2>
+        </div>
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-grip"></i> Tout</button>
+          <button class="filter-btn" data-filter="photo"><i class="fa-solid fa-camera"></i> Photo</button>
+          <button class="filter-btn" data-filter="video"><i class="fa-solid fa-video"></i> Vidéo</button>
+          <button class="filter-btn" data-filter="auto"><i class="fa-solid fa-car-side"></i> Automobile</button>
+          <button class="filter-btn" data-filter="paysage"><i class="fa-solid fa-mountain-sun"></i> Paysage</button>
+          <button class="filter-btn" data-filter="mariage"><i class="fa-solid fa-ring"></i> Mariage</button>
+        </div>
+      </div>
+
+      <div class="grid" id="grid">
+
+        <!-- Card 1 : Photo auto nuit -->
+        <div class="card gc-3 gr-3" data-tags="photo auto" data-title="Rassemblement District" data-meta="Photos · Automobile · 2026" data-gallery='["media/district/district.jpg","media/district/district2.jpg","media/district/district3.jpg","media/district/district4.jpg","media/district/district5.jpg","media/district/district6.jpg","media/district/district7.jpg","media/district/district8.jpg"]'>
+          <div class="card-tag">Photos</div>
+          <div class="card-thumb-wrap">
+            <img class="card-thumb" src="media/district/district.jpg" alt="Rassemblement District">
+          </div>
+          <div class="card-overlay">
+            <div class="overlay-title">Rassemblement District</div>
+            <div class="overlay-sub">Photos · Automobile</div>
+          </div>
+          <div class="card-info">
+            <div class="card-info-title">Rassemblement District</div>
+            <div class="card-info-meta">Photos · Automobile · 2026 · iPhone 16 Pro & DJI Mini 4 Pro</div>
+          </div>
+        </div>
+
+        <!-- Card 2 : Photo paysage coucher de soleil (4 photos du même thème) -->
+        <div class="card gc-3 gr-2" data-tags="photo paysage" data-title="Golden Hour" data-meta="Photo · Paysage · 2025" data-gallery='["media/golden-hour.jpg","media/golden-hour2.jpg","media/golden-hour3.jpg","media/golden-hour4.jpg"]'>
+          <div class="card-tag">Photo</div>
+          <div class="card-thumb-wrap">
+            <img class="card-thumb" src="media/golden-hour.jpg" alt="Golden Hour">
+          </div>
+          <div class="card-overlay">
+            <div class="overlay-title">Golden Hour</div>
+            <div class="overlay-sub">Photos · Paysage</div>
+          </div>
+          <div class="card-info">
+            <div class="card-info-title">Golden Hour</div>
+            <div class="card-info-meta">Photo · Paysage · 2024 · iPhone 16 Pro, DJI Mini 4 Pro & Nikon D800</div>
+          </div>
+        </div>
+
+        <!-- Card 3 : Vidéo auto (lien YouTube, ouvre dans un nouvel onglet) -->
+        <a href="https://www.youtube.com/watch?v=6g68wGUQxzw" target="_blank" rel="noopener" class="card gc-3 gr-2" data-youtube="true" data-tags="video paysage" data-title="DJI in mountains | DJI à la montagne" data-meta="Vidéo · Automobile · 1 min 51">
+          <div class="card-tag">Vidéo</div>
+          <div class="card-thumb-wrap">
+            <img class="card-thumb" src="https://img.youtube.com/vi/6g68wGUQxzw/hqdefault.jpg" alt="DJI in mountains | DJI à la montagne">
+          </div>
+          <div class="card-overlay">
+            <div class="play-btn"><i class="fa-brands fa-youtube"></i></div>
+            <div class="overlay-title">DJI in mountains | DJI à la montagne</div>
+            <div class="overlay-sub">Vidéo · Paysage</div>
+          </div>
+          <div class="card-info">
+            <div class="card-info-title">DJI in mountains | DJI à la montagne</div>
+            <div class="card-info-meta">Vidéo · Paysage · 1 min 51 · DJI Mini 4 Pro · S'ouvre dans YouTube</div>
+          </div>
+        </a>
+
+        <!-- Card 4 : Photos mariage Alex & Julie -->
+        <div class="card gc-3 gr-3" data-tags="photo mariage" data-title="Mariage (M. et Mme. CHAUVET)" data-meta="Photos · Mariage · 2026" data-gallery='["media/mariage-chauvet/mariage.jpg","media/mariage-chauvet/mariage2.jpg","media/mariage-chauvet/mariage3.jpg","media/mariage-chauvet/mariage4.jpg","media/mariage-chauvet/mariage5.jpg","media/mariage-chauvet/mariage6.jpg","media/mariage-chauvet/mariage7.jpg","media/mariage-chauvet/mariage8.jpg"]'>
+          <div class="card-tag">Photos</div>
+          <div class="card-thumb-wrap">
+            <img class="card-thumb" src="media/mariage-chauvet/mariage.jpg" alt="Mariage (M. et Mme. CHAUVET)">
+          </div>
+          <div class="card-overlay">
+            <div class="overlay-title">Mariage (M. et Mme. CHAUVET)</div>
+            <div class="overlay-sub">Photos · Mariage</div>
+          </div>
+          <div class="card-info">
+            <div class="card-info-title">Mariage (M. et Mme. CHAUVET)</div>
+            <div class="card-info-meta">Photos · Mariage · 2026 · DJI Mini 4 Pro, Pocket 4 & iPhone 16 Pro</div>
+          </div>
+        </div>
+
+        <!-- Card 4 : Photos mariage Alex & Julie -->
+        <div class="card gc-3 gr-3" data-tags="photo mariage" data-title="Mariage (M. et Mme. LASSERRE)" data-meta="Photos · Mariage · 2026" data-gallery='["media/mariage-lasserre/mariage.jpg","media/mariage-lasserre/mariage2.jpg","media/mariage-lasserre/mariage3.jpg","media/mariage-lasserre/mariage4.jpg","media/mariage-lasserre/mariage5.jpg","media/mariage-lasserre/mariage6.jpg","media/mariage-lasserre/mariage7.jpg", "media/mariage-lasserre/mariage8.jpg", "media/mariage-lasserre/mariage9.jpg"]'>
+          <div class="card-tag">Photos</div>
+          <div class="card-thumb-wrap">
+            <img class="card-thumb" src="media/mariage-lasserre/mariage.jpg" alt="Mariage (M. et Mme. LASSERRE)">
+          </div>
+          <div class="card-overlay">
+            <div class="overlay-title">Mariage (M. et Mme. LASERRE)</div>
+            <div class="overlay-sub">Photos · Mariage</div>
+          </div>
+          <div class="card-info">
+            <div class="card-info-title">Mariage (M. et Mme. LASERRE)</div>
+            <div class="card-info-meta">Photos · Mariage · 2026 · DJI Mini 4 Pro & iPhone 16 Pro</div>
+          </div>
+        </div>
+
+        <!-- Card 6 : Photo paysage brume -->
+        <div class="card gc-3 gr-2" data-tags="photo paysage" data-title="Brume Matinale" data-meta="Photo · Paysage · 2024">
+          <div class="card-tag">Photo</div>
+          <div class="card-thumb-wrap">
+            <img class="card-thumb" src="media/brume-matinale.jpg" alt="Brume Matinale">
+          </div>
+          <div class="card-overlay">
+            <div class="overlay-title">Brume Matinale</div>
+            <div class="overlay-sub">Photo · Paysage</div>
+          </div>
+          <div class="card-info">
+            <div class="card-info-title">Brume Matinale</div>
+            <div class="card-info-meta">Photo · Paysage · 2024</div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- About -->
+    <section id="about">
+      <div class="about-grid">
+        <div>
+          <p class="section-label">À propos</p>
+          <h2 class="section-title" style="margin-bottom:1.5rem">Capturer la <span style="color:var(--accent);font-style:italic">vitesse, </span><br>les <span style="color:var(--accent);font-style:italic">grands espaces</span><br>et vos plus beaux <span style="color:var(--accent);font-style:italic">moments.</span></h2>
+          <p class="about-body">
+            Photographe et vidéaste basé en Rhône-Alpes. Deux passions : l'automobile et les grands espaces. Je couvre aussi vos mariages, du premier regard à la dernière danse.
+          </p>
+          <a href="https://instagram.com/jimmymedia_" target="_blank" rel="noopener" class="btn-outline"><i class="fa-brands fa-instagram"></i> Instagram</a>
+          <a href="https://www.youtube.com/@jimmyrichaletmedia" target="_blank" rel="noopener" class="btn-outline"><i class="fa-brands fa-youtube"></i>YouTube</a>
+          <a href="https://www.tiktok.com/@jimmyrichalet.media" target="_blank" rel="noopener" class="btn-outline"><i class="fa-brands fa-tiktok"></i>TikTok</a>
+        </div>
+        <div>
+          <div class="stats-row" style="margin-bottom:2rem">
+            <div class="stat-card">
+              <i class="fa-solid fa-camera"></i>
+              <div class="stat-n">150+</div>
+              <div class="stat-l">Clichés</div>
+            </div>
+            <div class="stat-card">
+              <i class="fa-solid fa-clapperboard"></i>
+              <div class="stat-n">+ 10</div>
+              <div class="stat-l">Films</div>
+            </div>
+            <div class="stat-card">
+              <i class="fa-solid fa-calendar-days"></i>
+              <div class="stat-n">3 ans</div>
+              <div class="stat-l">Expérience</div>
+            </div>
+          </div>
+          <p class="section-label" style="margin-bottom:1rem">Équipement</p>
+          <div class="gear-grid">
+            <div class="gear-item"><i class="fa-solid fa-camera-retro"></i><div><div class="gear-name">Nikon D3200</div><div class="gear-role">Appareil principal</div></div></div>
+            <div class="gear-item"><i class="fa-solid fa-video"></i><div><div class="gear-name">DJI Osmo Pocket 4</div><div class="gear-role">Caméra principale</div></div></div>
+            <div class="gear-item"><i class="fa-solid fa-mobile-screen"></i><div><div class="gear-name">iPhone 16 Pro</div><div class="gear-role">Appareil secondaire</div></div></div>
+            <div class="gear-item"><i class="fa-solid fa-helicopter"></i><div><div class="gear-name">DJI Mini 4 Pro</div><div class="gear-role">Drone</div></div></div>
+            <div class="gear-item"><i class="fa-solid fa-film"></i><div><div class="gear-name">Adobe Premiere Pro</div><div class="gear-role">Montage vidéo</div></div></div>
+            <div class="gear-item"><i class="fa-solid fa-sliders"></i><div><div class="gear-name">Lightroom</div><div class="gear-role">Retouches photos</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="contact-bar">
+        <div>
+          <p class="section-label">Contact</p>
+          <p class="contact-cta">Une idée de <span>projet</span> ?</p>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center">
+          <a href="mailto:jimmy.richalet.media@gmail.com" class="btn-primary"><i class="fa-solid fa-envelope"></i>Envoyer un mail</a>
+          <a href="https://instagram.com/jimmymedia_" target="_blank" rel="noopener" class="btn-outline"><i class="fa-brands fa-instagram"></i> Instagram</a>
+          <a href="https://www.tiktok.com/@jimmyrichalet.media" target="_blank" rel="noopener" class="btn-outline"><i class="fa-brands fa-tiktok"></i>TikTok</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span><i class="fa-regular fa-copyright"></i> 2026 Jimmy Richalet — Tous droits réservés</span>
+    <span><i class="fa-solid fa-location-dot"></i> Haute-Savoie</span>
+  </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <button class="modal-close" id="modal-close">&times;</button>
+  <button class="modal-nav modal-prev" id="modal-prev" aria-label="Image précédente"><i class="fa-solid fa-chevron-left"></i></button>
+  <button class="modal-nav modal-next" id="modal-next" aria-label="Image suivante"><i class="fa-solid fa-chevron-right"></i></button>
+  <div class="modal-content">
+    <img id="modal-img" src="" alt="" style="display:none">
+    <video id="modal-video" src="" controls style="display:none"></video>
+    <p class="modal-cap" id="modal-cap"></p>
+    <p class="modal-counter" id="modal-counter" style="display:none"></p>
+    <div class="modal-dots" id="modal-dots"></div>
+  </div>
+</div>
+
+<script>
+  /* ── Theme toggle ── */
+  const html = document.documentElement;
+  const themeBtn = document.getElementById('theme-btn');
+  const saved = localStorage.getItem('theme') || 'dark';
+  html.dataset.theme = saved;
+  themeBtn.textContent = saved === 'dark' ? '🌙' : '☀️';
+
+  themeBtn.addEventListener('click', () => {
+    const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+    html.dataset.theme = next;
+    themeBtn.textContent = next === 'dark' ? '🌙' : '☀️';
+    localStorage.setItem('theme', next);
+  });
+
+  /* ── Scroll reveal ── */
+  const cards = document.querySelectorAll('.card');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 90);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  cards.forEach(c => observer.observe(c));
+
+  /* ── Filters ── */
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.card').forEach(card => {
+        if (!card.dataset.tags) return;
+        card.style.display = (f === 'all' || card.dataset.tags.includes(f)) ? '' : 'none';
+      });
+    });
+  });
+
+  /* ── Modal ── */
+  const modal   = document.getElementById('modal');
+  const mImg    = document.getElementById('modal-img');
+  const mVid    = document.getElementById('modal-video');
+  const mCap    = document.getElementById('modal-cap');
+  const mCount  = document.getElementById('modal-counter');
+  const mDots   = document.getElementById('modal-dots');
+  const mPrev   = document.getElementById('modal-prev');
+  const mNext   = document.getElementById('modal-next');
+
+  let galleryImages = [];
+  let galleryIndex  = 0;
+
+  function showGalleryImage() {
+    mImg.src = galleryImages[galleryIndex];
+    mImg.style.display = 'block';
+    mVid.style.display = 'none';
+    mCount.textContent = (galleryIndex + 1) + ' / ' + galleryImages.length;
+    mDots.querySelectorAll('.modal-dot').forEach((d, i) => d.classList.toggle('active', i === galleryIndex));
+  }
+
+  function buildDots() {
+    mDots.innerHTML = '';
+    galleryImages.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.className = 'modal-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', e => {
+        e.stopPropagation();
+        galleryIndex = i;
+        showGalleryImage();
+      });
+      mDots.appendChild(dot);
+    });
+  }
+
+  function nextImage() {
+    if (galleryImages.length < 2) return;
+    galleryIndex = (galleryIndex + 1) % galleryImages.length;
+    showGalleryImage();
+  }
+
+  function prevImage() {
+    if (galleryImages.length < 2) return;
+    galleryIndex = (galleryIndex - 1 + galleryImages.length) % galleryImages.length;
+    showGalleryImage();
+  }
+
+  function openCard(card) {
+    mCap.textContent = (card.dataset.title || '') + (card.dataset.meta ? ' — ' + card.dataset.meta : '');
+    mImg.style.display = 'none';
+    mVid.style.display = 'none';
+    mVid.pause();
+
+    const galleryAttr = card.dataset.gallery;
+    let parsedGallery = [];
+    if (galleryAttr) {
+      try { parsedGallery = JSON.parse(galleryAttr); } catch (e) { parsedGallery = []; }
+    }
+
+    const img = card.querySelector('img.card-thumb');
+    const vid = card.querySelector('video.card-thumb');
+
+    if (parsedGallery.length > 1) {
+      galleryImages = parsedGallery;
+      galleryIndex = 0;
+      buildDots();
+      showGalleryImage();
+      mPrev.style.display = 'flex';
+      mNext.style.display = 'flex';
+      mDots.style.display = 'flex';
+      mCount.style.display = 'block';
+    } else {
+      galleryImages = [];
+      mPrev.style.display = 'none';
+      mNext.style.display = 'none';
+      mDots.style.display = 'none';
+      mCount.style.display = 'none';
+      if (img) {
+        mImg.src = img.src; mImg.style.display = 'block';
+      } else if (vid) {
+        mVid.src = vid.src; mVid.style.display = 'block';
+      }
+    }
+    modal.classList.add('open');
+  }
+
+  document.querySelectorAll('.card').forEach(c => {
+    if (c.dataset.youtube === 'true') return; // carte-lien externe : comportement natif du <a>
+    c.addEventListener('click', () => openCard(c));
+  });
+
+  mNext.addEventListener('click', e => { e.stopPropagation(); nextImage(); });
+  mPrev.addEventListener('click', e => { e.stopPropagation(); prevImage(); });
+
+  function closeModal() { modal.classList.remove('open'); mVid.pause(); }
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (!modal.classList.contains('open')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+  });
+
+  /* Swipe tactile (mobile) */
+  let touchStartX = 0;
+  modal.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+  modal.addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(diff) > 50) { diff < 0 ? nextImage() : prevImage(); }
+  }, { passive: true });
+
+</script>
+
+</body>
+</html>
